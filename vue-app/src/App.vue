@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-
 const inputText = ref('');
 const result = ref('');
 
@@ -25,24 +24,29 @@ const showResult = computed(() => !!result.value);
 <template>
   <div class="app">
     <main class="text-manipulator">
-      <h1>a</h1>
-      <textarea
-        v-model="inputText"
-        placeholder="Ingrese el texto aquí"
-        rows="10"
-      ></textarea>
-      <p class="input-note">Solo letras minúsculas y sin acentos</p>
-      <div class="button-group">
-        <button @click="handleEncrypt" class="encrypt">Encriptar</button>
-        <button @click="handleDecrypt" class="decrypt">Desencriptar</button>
+      <div class="logo">
+        <img src="./assets/icons/Logo.png" alt="">
       </div>
+      <form action="">
+        <textarea
+          class="text-area"
+          v-model="inputText"
+          placeholder="Ingrese el texto aquí"
+          rows="auto"
+        ></textarea>
+        <p class="input-note"> <img src="./assets/icons/IconoExclamacion.png" alt="">  Solo letras minúsculas y sin acentos</p>
+        <div class="button-group">
+          <button @click="handleEncrypt" class="encrypt">Encriptar</button>
+          <button @click="handleDecrypt" class="decrypt">Desencriptar</button>
+        </div>
+      </form>
     </main>
     <aside class="text-shower">
       <div v-if="!showResult" class="no-result">
         <div class="image-placeholder">
           <img src="./assets/icons/Muñeco.png" alt="">
         </div>
-        <h2>Ningún mensaje fue encontrado</h2>
+          <h2>Ningún mensaje fue encontrado</h2>
         <p>Ingresa el texto que desees encriptar o desencriptar.</p>
       </div>
       <div v-else class="result">
@@ -59,22 +63,44 @@ const showResult = computed(() => !!result.value);
   background: var(--bg-thirdary);
   display: flex;
   align-items: center;
+  flex-wrap:wrap;
   justify-content: center;
   padding: 30px;
 
   .text-manipulator {
     background-color: inherit;
-    flex-grow: 1;
+    width: 600px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 
     textarea {
       width: 100%;
       margin-bottom: 10px;
+      border: none;
+      background: var(--bg-thirdary);
+      color: var(--color-secondary);
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
     }
 
     .input-note {
       font-size: 0.8em;
       margin-bottom: 10px;
+      color: var(--color-thirdary);
+      display: flex;
+      gap: 5px;
+      justify-content: left;
+      align-items: center;
+      
+      img {
+        aspect-ratio: 1/1;
+        width: 10px;
+        height: 10px;
+      }
     }
 
     .button-group {
@@ -82,12 +108,17 @@ const showResult = computed(() => !!result.value);
       gap: 10px;
 
       button {
-        padding: 10px 20px;
+        width: 100%;
+        padding: 10px 30px;
+        border-radius: 15px;
         &.encrypt {
-          background-color: var(--primary-color);
+          background-color: var(--bg-primary);
+          color: var(--color-primary);
         }
         &.decrypt {
-          background-color: var(--secondary-color);
+          background-color: var(--bg-button-secondary);
+          outline: 1px solid var(--bg-primary);
+          color: var(--color-secondary);
         }
       }
     }
@@ -96,9 +127,10 @@ const showResult = computed(() => !!result.value);
   .text-shower {
     background-color: var(--bg-quarter);
     border-radius: 32px;
+    flex: 2;
+    padding: 20px;
     height: 100%;
     width: 400px;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
