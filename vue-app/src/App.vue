@@ -73,7 +73,7 @@ const handleDecrypt = async () => {
 const copyResult = () => {
   navigator.clipboard.writeText(result.value)
     .then(() => {
-      alert('Texto copiado al portapapeles');
+      console.log('Texto copiado al portapapeles');
     })
     .catch(err => {
       console.error('Error al copiar: ', err);
@@ -125,14 +125,26 @@ const showResult = computed(() => !!result.value);
 
 <style lang="scss" scoped>
 .app {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: var(--bg-thirdary);
   display: flex;
   align-items: center;
   flex-wrap:wrap;
   justify-content: center;
   padding: 30px;
+
+  .logo{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+
+    img{
+      position: relative;
+      left: -41px;
+      padding: 0 0 10px 0;
+    }
+  }
 
   .text-manipulator {
     background-color: inherit;
@@ -148,6 +160,10 @@ const showResult = computed(() => !!result.value);
         border: none;
         background: var(--bg-thirdary);
         color: var(--color-secondary);
+        font-family: Inter;
+        font-size: 32px;
+        font-weight: 500;
+        height: 100%;
 
         &:focus {
           outline: none;
@@ -196,17 +212,23 @@ const showResult = computed(() => !!result.value);
   .text-shower {
     background-color: var(--bg-quarter);
     border-radius: 32px;
-    flex: 2;
+    flex: 1;
     padding: 20px;
-    height: 100%;
     width: 400px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    // justify-content: center;
+    // align-items: center;
 
     .no-result {
       text-align: center;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
 
       .image-placeholder {
         margin: 0 auto 20px;
@@ -220,16 +242,23 @@ const showResult = computed(() => !!result.value);
 
     .result {
       width: 100%;
-      text-align: center;
+      height: 100%;
+      text-align: left;
+      color: var(--color-thirdary);
+      white-space:  pre-wrap;
+      text-wrap: wrap;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       .copy-button {
-        margin-top: 10px;
-        padding: 5px 15px;
-        background-color: var(--bg-primary);
-        color: var(--color-primary);
-        border: none;
-        border-radius: 5px;
+        width: 100%;
+        padding: 10px 30px;
+        border-radius: 15px;
         cursor: pointer;
+        outline: 1px solid var(--bg-primary);
+        color: var(--color-secondary);
+        background-color: var(--bg-quarter);
       }
     }
   }
