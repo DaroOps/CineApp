@@ -1,0 +1,6 @@
+/* Variables styles */
+@import './variables/variables.css';
+
+/* Base styles */
+@import './base/global.css';
+
